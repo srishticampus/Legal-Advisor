@@ -1,0 +1,270 @@
+.ju-advocate-label {
+  color: #986F06;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 27.11px;
+  font-weight: 200;
+}
+
+.no-bullets {
+  list-style-type: none;
+  padding-left: 0;
+}
+.no-bullets li {
+  margin-bottom: 10px;
+}
+
+.image-style-tick {
+  margin-right: 10px;
+}
+
+.ju-advocate-sublabel {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+}
+
+.first-img {
+  position: relative;
+  height: 650px;
+  width: 100%;
+  text-align: center;
+  background-image: url('../../Assets/junior-advocate-image1.png');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.first-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.744);
+  pointer-events: none;
+}
+
+.img1-heading {
+  color: white;
+  padding-top: 70px;
+  position: relative;
+}
+
+.img1-sub-heading {
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  padding-top: 50px;
+  font-size: 30px;
+  position: relative;
+}
+
+.find-button {
+  margin-top: 80px;
+  background-color: #986F06;
+  color: white;
+  border-radius: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-color: #986F06;
+  position: relative;
+}
+
+.find-button:hover {
+  background-color: #986f06fa;
+  border-color: #986F06;
+  position: relative;
+}
+
+.hr-style {
+  border: none;
+  height: 2px;
+  color: white;
+  background-color: rgb(255, 255, 255);
+  margin-left: 520px;
+  margin-right: 520px;
+}
+
+.backimage-2 {
+  background-image: url(../../Assets/ju-ad-img2.png);
+  height: 650px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.practice-area-label {
+  padding-top: 30px;
+  color: white;
+}
+
+.label-text {
+  color: white;
+  padding-top: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 17.11px;
+  
+}
+
+.div3-image {
+  text-align: center;
+}
+
+.cards-position {
+  background-color: #B4986A;
+  height: 120px;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+.padding-each-card {
+  padding-left: 75px;
+  padding-top: 50px;
+}
+
+.main-card-title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.918);
+}
+
+.card-sub-text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: black;
+}
+
+.advocate-image {
+  width: 100%;
+  max-width: 300px;
+}
+
+.second-main-img{
+  width: 33.33%;
+  z-index: 2;
+}
+
+.second-man-img{
+  height: 100%;
+  width: 60%;
+  z-index: 1;
+}
+
+.background-image-column{
+  background-image: url(../../Assets/about_bg.jpg);
+  background-size: cover;
+  background-position: left;
+  display: flex;
+}
+
+.background-image-column::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #EDC742C4; 
+}
+
+.main-content-style{
+  margin-left: 70px;
+}
+
+.icon-style{
+  height: 40px;
+  width: 30px;
+  color: rgba(0, 0, 0, 0.879);
+}
+
+@media (max-width: 767px) {
+  .first-img {
+    height: 400px;
+  }
+
+  .img1-heading {
+    font-size: 24px;
+  }
+
+  .img1-sub-heading {
+    font-size: 16px;
+  }
+
+  .find-button {
+    margin-top: 40px;
+  }
+
+  .hr-style {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+
+  .backimage-2 {
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .practice-area-label {
+    font-size: 18px;
+  }
+
+  .label-text {
+    font-size: 14px;
+  }
+
+  .padding-each-card {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .cards-position {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .card-sub-text{
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 575px) {
+  .img1-heading {
+    font-size: 18px;
+    padding-top: 30px;
+  }
+
+  .img1-sub-heading {
+    font-size: 12px;
+  }
+
+  .find-button {
+    margin-top: 20px;
+  }
+
+  .hr-style {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .label-text {
+    font-size: 12px;
+  }
+
+  .cards-position {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+  }
+  .card-sub-text{
+    font-size: 12px;
+    font-weight: 600;
+  }
+}

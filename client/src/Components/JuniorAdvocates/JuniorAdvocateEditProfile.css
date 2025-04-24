@@ -1,0 +1,49 @@
+.ju-advocate_edit_profile{
+    background-color: #f3eded;
+}
+
+.ju-advocate_edit_profile_title {
+    font-size: 19.01px;
+    font-weight: 500;
+    line-height: 28.52px;
+    text-align: center;
+}
+.ju-advocate_edit_profile_sub_title{
+    font-size: 19.01px;
+  font-weight: 500;
+  line-height: 28.52px;
+}
+.ju-advocate_edit_profile_sub_title2{
+    padding-top: 8px;
+}
+.ju-advocate_edit_profile_sub_title2 p{
+    margin: 0;
+    padding: 0;
+    margin-left: 8px;
+    font-size: 13.01px;
+    font-weight: 400;
+    line-height: 19.52px;
+}
+.ju-advocate_edit_profile_sub_title2 img{
+    height: 14px;
+}
+.textbox-style{
+    height: 50px;
+    width: 100%;
+    border-color: black;
+    border-width: 2px;
+  }
+.button-style-change{
+    background-color: #986F06;
+    border-color: #986F06;
+    color: white;
+    border-radius: 80px;
+    width: 30%;
+}
+.button-style-change:hover{
+    background-color: #986f06d0;
+    border-color: #986F06;
+}
+.button-col{
+    text-align: center;
+}

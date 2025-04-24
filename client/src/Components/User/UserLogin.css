@@ -1,0 +1,38 @@
+.userloginform1 {
+    width: 370px !important;
+}
+
+.userloginformhead {
+    position: relative;
+    font-size: 50px;
+    right: 200px;
+    top: 80px;
+}
+
+.userlogindiv1 {
+    margin-top: 20px;
+    height: 500px;
+    width: 800px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px 20px;
+    background-image: url('../../Assets/bg3.avif');
+}
+
+.userlogindiv2 {
+    position: relative;
+    top: 150px;
+}
+
+.userloginbtn {
+    margin-top: 25px;
+    width: 200px;
+}
+
+.userlogindiv3 {
+    top: 190px;
+    margin-top: 15px;
+
+    margin-left: 3px;
+    font-size: 20px;
+}

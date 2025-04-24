@@ -1,0 +1,47 @@
+.junior-reg-title{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 10px;
+    font-size: 27px;
+    font-weight: 400;
+    color: black;
+}
+
+.junior-heading-div{
+    height: 90px;
+    width: 100%;
+    background-color: #AA9166;
+    text-align: center;
+    padding-top: 18px;
+}
+
+.junior-text-loginhere{
+    font-family: 'Poppins',Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight:600;
+    padding-left: 40%;
+}
+
+.junior-advocate-input{
+    border-width: 2px;
+    border-color: black;
+}
+
+.user_registration_box {
+    width: 40%;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+  }
+ 
+  .user_registration_button button {
+    padding: 10px 40px;
+    border-radius: 27.09px;
+    background-color: #986f06;
+    color: #ffffff;
+    font-size: 16.11px;
+    font-weight: 900;
+    line-height: 19.5px;
+    border: none;
+  }

@@ -1,0 +1,38 @@
+.junior-form-input-style{
+    font-size: 15px;
+    border-radius: 10px;
+    height: 50px;
+    font-family: 'Poppins' Verdana ;
+    border-width: 2px ;
+    border-color: black;
+}
+
+.junior-heading-div{
+    height: 90px;
+    width: 100%;
+    background-color: #AA9166;
+    text-align: center;
+    padding-top: 18px;
+}
+
+.junior-specialization-form-select{
+    border-radius: 10px;
+    height: 50px;
+    font-family: 'Poppins' Verdana ;
+    border-width: 2px ;
+    border-color: black;
+}
+.junior-button-submit{
+    background-color: #986F06;
+    border-color: #986F06;
+}
+
+.junior-button-submit:hover{
+    background-color: #986f06be;
+    border-color: #986F06;
+}
+
+.junior-submit-btn-div{
+    text-align: center;
+
+}
