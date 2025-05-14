@@ -10,8 +10,8 @@ app.use(express.static( `${__dirname}/upload`));
 
 app.use(cors())
 const route=require('./routes')
-app.use('/legal_liaison_api',route)
+app.use('/',route)
 
-app.listen(4043,()=>{
-    console.log("Server created successfully at 4043");
+app.listen(4060,()=>{
+    console.log("Server created successfully at 4060");
 })
