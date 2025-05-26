@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import img1 from "../../Assets/logo2.png";
 import { Link, useNavigate } from "react-router-dom";
-import "./AdminNav.css";
-
+import "../Admin/AdminNav.css";
+import { toast } from "react-toastify";
 function AdminNav() {
   const navigate = useNavigate();
 
   const logout = () => {
     localStorage.clear();
     navigate("/");
+    toast.success("Logout Successfully");
   };
 
   useEffect(() => {
@@ -29,7 +30,7 @@ function AdminNav() {
               height="75"
               className="d-inline-block align-top logo-adjust"
             />{" "}
-            LEGAL LIAISON
+            LEGAL ADVISOR
           </Link>
           <button
             className="navbar-toggler"

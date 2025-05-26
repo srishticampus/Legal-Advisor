@@ -6,7 +6,7 @@ import AdminLogin from "./AdminLogin";
 import ViewAllAdvocates from "./ViewAllAdvocates";
 import ApproveRejectAdvocate from "./ApproveRejectAdvocate";
 import ViewProfile_AR from "./ViewProfile_AR";
-import "./AdminMain.css";
+import "../Admin/AdminMain.css";
 import AdminViewAllJuniorAdvocate from "./AdminViewAllJuniorAdvocate";
 import AdminApproveRejectJuniorAdvocate from "./ViewJuniorAdvocateRequest";
 import ViewJuniorAdvocateRequest from "./ViewJuniorAdvocateRequest";

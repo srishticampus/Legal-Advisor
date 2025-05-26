@@ -1,6 +1,6 @@
 //local
 
-export const imageUrl= 'http://localhost:4043';
+export const imageUrl= 'http://localhost:4060';
 
 //server
 

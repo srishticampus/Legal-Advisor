@@ -5,11 +5,58 @@ import axiosMultipartInstance from "../Constants/FormDataUrl";
 import { InternRegistrationSchema } from "../Constants/Schema";
 import { toast } from "react-toastify";
 import 'remixicon/fonts/remixicon.css';
+import * as Yup from 'yup';
 
 function InternRegistration() {
     const navigate = useNavigate();
-
     const [isToastVisible, setToastVisible] = useState(false);
+
+    // Updated validation schema with all requested validations
+    const UpdatedInternRegistrationSchema = Yup.object().shape({
+        name: Yup.string()
+            .required("Name is required")
+            .matches(/^[a-zA-Z\s]+$/, "Name should contain only alphabets"),
+        contact: Yup.string()
+            .required("Contact is required")
+            .matches(/^[0-9]{10}$/, "Contact should be 10 digits"),
+        email: Yup.string()
+            .email("Invalid email")
+            .required("Email is required"),
+        password: Yup.string()
+            .required("Password is required")
+            .min(6, "Password must be at least 6 characters"),
+        gender: Yup.string()
+            .required("Gender is required"),
+        address: Yup.string()
+            .required("Address is required"),
+        percentage: Yup.number()
+            .required("Percentage is required")
+            .min(0, "Percentage cannot be negative")
+            .max(100, "Percentage cannot be more than 100"),
+        qualification: Yup.string()
+            .required("Qualification is required")
+            .matches(/^[a-zA-Z\s]+$/, "Qualification should contain only alphabets"),
+        dob: Yup.date()
+            .required("Date of Birth is required")
+            .max(new Date(), "Date of Birth cannot be in the future"),
+        institute: Yup.string()
+            .required("Institute is required")
+            .matches(/^[a-zA-Z\s]+$/, "Institute should contain only alphabets"),
+        yearOfPassout: Yup.number()
+            .required("Year of Passout is required")
+            .min(1900, "Year must be after 1900")
+            .max(new Date().getFullYear(), "Year cannot be in the future")
+            .test(
+                'len',
+                'Must be exactly 4 digits',
+                val => val && val.toString().length === 4
+            ),
+        specialization: Yup.string()
+            .required("Specialization is required")
+            .matches(/^[a-zA-Z\s]+$/, "Specialization should contain only alphabets"),
+        profilePic: Yup.mixed()
+            .required("Profile picture is required")
+    });
 
     const onSubmit = (values) => {
         console.log(values);
@@ -74,15 +121,47 @@ function InternRegistration() {
                 specialization: "",
                 profilePic: null,
             },
-            validationSchema: InternRegistrationSchema,
+            validationSchema: UpdatedInternRegistrationSchema,
             onSubmit,
         });
+
+    // Helper function to prevent non-alphabet characters
+    const handleAlphabetInput = (e) => {
+        const value = e.target.value;
+        if (/^[a-zA-Z\s]*$/.test(value)) {
+            handleChange(e);
+        }
+    };
+
+    // Helper function to prevent non-numeric characters
+    const handleNumericInput = (e) => {
+        const value = e.target.value;
+        if (/^\d*$/.test(value)) {
+            handleChange(e);
+        }
+    };
+
+    // Helper function for percentage input (0-100)
+    const handlePercentageInput = (e) => {
+        const value = e.target.value;
+        if (value === "" || (Number(value) >= 0 && Number(value) <= 100)) {
+            handleChange(e);
+        }
+    };
+
+    // Helper function for year input (4 digits, not in future)
+    const handleYearInput = (e) => {
+        const value = e.target.value;
+        if (value === "" || (value.length <= 4 && Number(value) <= new Date().getFullYear())) {
+            handleChange(e);
+        }
+    };
 
     return (
         <div className="user_registration">
             <div className="user_registration_container">
                 <div className="user_registration_input_group m-auto mt-5 mb-5">
-                    <form onSubmit={(e) => { handleSubmit(e) }}>
+                    <form onSubmit={handleSubmit}>
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="user_registration_input">
@@ -93,7 +172,7 @@ function InternRegistration() {
                                         placeholder="Enter your name"
                                         name="name"
                                         value={values.name}
-                                        onChange={handleChange}
+                                        onChange={handleAlphabetInput}
                                         onBlur={handleBlur}
                                     />
                                     {errors.name && touched.name && (
@@ -124,13 +203,14 @@ function InternRegistration() {
                                 <div className="user_registration_input">
                                     <label>Contact</label>
                                     <input
-                                        type="number"
+                                        type="text"
                                         className="form-control border border-dark"
                                         placeholder="Enter your contact"
                                         name="contact"
                                         value={values.contact}
-                                        onChange={handleChange}
+                                        onChange={handleNumericInput}
                                         onBlur={handleBlur}
+                                        maxLength="10"
                                     />
                                     {errors.contact && touched.contact && (
                                         <span className="text-danger">{errors.contact}</span>
@@ -160,13 +240,14 @@ function InternRegistration() {
                                 <div className="user_registration_input">
                                     <label>Percentage</label>
                                     <input
-                                        type="number"
+                                        type="text"
                                         className="form-control border border-dark"
                                         placeholder="Enter your percentage"
                                         name="percentage"
                                         value={values.percentage}
-                                        onChange={handleChange}
+                                        onChange={handlePercentageInput}
                                         onBlur={handleBlur}
+                                        maxLength="5"
                                     />
                                     {errors.percentage && touched.percentage && (
                                         <span className="text-danger">{errors.percentage}</span>
@@ -182,7 +263,7 @@ function InternRegistration() {
                                         placeholder="Enter your qualification"
                                         name="qualification"
                                         value={values.qualification}
-                                        onChange={handleChange}
+                                        onChange={handleAlphabetInput}
                                         onBlur={handleBlur}
                                     />
                                     {errors.qualification && touched.qualification && (
@@ -202,6 +283,7 @@ function InternRegistration() {
                                         value={values.dob}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        max={new Date().toISOString().split('T')[0]}
                                     />
                                     {errors.dob && touched.dob && (
                                         <span className="text-danger">{errors.dob}</span>
@@ -217,7 +299,7 @@ function InternRegistration() {
                                         placeholder="Enter your institute"
                                         name="institute"
                                         value={values.institute}
-                                        onChange={handleChange}
+                                        onChange={handleAlphabetInput}
                                         onBlur={handleBlur}
                                     />
                                     {errors.institute && touched.institute && (
@@ -231,13 +313,14 @@ function InternRegistration() {
                                 <div className="user_registration_input">
                                     <label>Year of Passout</label>
                                     <input
-                                        type="number"
+                                        type="text"
                                         className="form-control border border-dark"
                                         placeholder="Enter your year of passout"
                                         name="yearOfPassout"
                                         value={values.yearOfPassout}
-                                        onChange={handleChange}
+                                        onChange={handleYearInput}
                                         onBlur={handleBlur}
+                                        maxLength="4"
                                     />
                                     {errors.yearOfPassout && touched.yearOfPassout && (
                                         <span className="text-danger">{errors.yearOfPassout}</span>
@@ -307,6 +390,7 @@ function InternRegistration() {
                                         onChange={(event) => {
                                             setFieldValue("profilePic", event.currentTarget.files[0]);
                                         }}
+                                        onBlur={handleBlur}
                                     />
                                     {errors.profilePic && touched.profilePic && (
                                         <span className="text-danger">{errors.profilePic}</span>

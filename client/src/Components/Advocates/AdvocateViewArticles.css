@@ -1,0 +1,38 @@
+.adv_view_articles{
+    padding: 30px 0;
+}
+
+.article_cards{
+    width: 100%;
+    min-height: 40vh;
+    background-color: #BEA170;
+    margin: auto;
+}
+
+.article_card_image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.article_card_image img{
+    height: 40vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.article_card_container{
+    padding: 30px 40px;
+}
+
+.article_card_container_head{
+    display: flex;
+    justify-content: space-between;
+}
+
+.article_card_container_actions button{
+    background-color: #ffffff;
+    border: 2px solid #986F06;
+    margin-right: 5px;
+    
+}

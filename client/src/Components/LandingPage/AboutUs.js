@@ -17,7 +17,7 @@ function AboutUs() {
         <div className="col-lg-6 col-md-6 col-sm-12">
           <div>
             <p className="text-justify" >
-              Welcome to [Your Legal Practice Management System], your trusted
+              Welcome to Legal Advisor, your trusted
               partner in legal services. We are a team of dedicated and
               experienced legal professionals committed to providing
               high-quality legal solutions tailored to your needs.
@@ -25,7 +25,7 @@ function AboutUs() {
 
             <h3>Our Mission</h3>
             <p className="text-justify" >
-              At [Your Legal Practice], our mission is to empower individuals
+              At Legal Advisor, our mission is to empower individuals
               and businesses by offering comprehensive legal services. We strive
               to deliver excellence in legal representation, advice, and case
               management, ensuring our clients achieve the best possible
@@ -40,7 +40,7 @@ function AboutUs() {
           <div>
             <h3>Why Choose Us?</h3>
             <p className="text-justify" >
-              Choosing [Your Legal Practice] means choosing a team of skilled
+              Choosing Legal Advisor means choosing a team of skilled
               advocates and legal experts dedicated to your success. Here's why
               you should partner with us:
             </p>
@@ -78,7 +78,7 @@ function AboutUs() {
       <div className="mt-5">
         <h3>Our Team</h3>
         <p>
-          Meet the faces behind [Your Legal Practice]. Our team is comprised of
+          Meet the faces behind Legal Advisor. Our team is comprised of
           passionate advocates, legal experts, and support staff dedicated to
           delivering exceptional service. Together, we work collaboratively to
           ensure the success of your legal endeavors.

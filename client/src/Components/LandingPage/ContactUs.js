@@ -8,7 +8,7 @@ function ContactUs() {
         <h3>Contact Us</h3>
         <div class="container">
           <p>
-            Ready to get started? Contact [Your Legal Practice] today to discuss
+            Ready to get started? Contact Legal Advisor today to discuss
             your legal needs. Whether you're seeking legal advice,
             representation, or case management services, we're here to help you
             navigate the complexities of the legal system.

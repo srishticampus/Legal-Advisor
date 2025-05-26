@@ -1,0 +1,14 @@
+.adv_view_all_req {
+  min-height: 90vh;
+  background-color: #f3eded;
+  padding: 50px 70px;
+}
+
+.adv_view_all_req table{
+    border-radius: 14px;
+}
+
+.adv_view_all_req th,
+.adv_view_all_req td {
+    padding: 20px;
+}

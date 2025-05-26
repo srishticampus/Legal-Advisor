@@ -9,7 +9,7 @@ import { FaMoneyBillAlt } from "react-icons/fa";
 import { IoHammerOutline } from "react-icons/io5";
 import { MdFamilyRestroom } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 function JuniorAdvocateHome() {
 
   const navigate = useNavigate();
@@ -28,7 +28,10 @@ function JuniorAdvocateHome() {
         <h1 className='img1-heading'>Empowering Your Legal Journey</h1>
         <hr className='hr-style' />
         <p className='img1-sub-heading'>Consider mentors who have a reputation for being approachable<br /> and supportive.</p>
+      <Link to="/JuniorAdvocate-viewalladvocate">
         <button type="button" className="btn btn-warning find-button">Find Advocate</button>
+
+      </Link>
       </div>
       <div className='container-fluid'>
         <div className="row">
