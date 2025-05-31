@@ -25,7 +25,7 @@ function AdminFooter() {
               width="70"
               height="90"
             />
-            <span className="footer-logo-text-change ml-2">LEGAL LIAISON</span>
+            <span className="footer-logo-text-change ml-2">LEGAL ADVISOR</span>
           </div>
           <div className="col-8 col-md-6  text-md-left mt-3 mt-md-0">
             <span className="footer-text">

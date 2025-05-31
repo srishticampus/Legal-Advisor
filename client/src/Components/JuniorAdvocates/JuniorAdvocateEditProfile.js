@@ -9,7 +9,6 @@ import upimg from "../../Assets/updateImage.jpg";
 
 function JuniorAdvocateEditProfile() {
   const id = localStorage.getItem("junioradvocateId");
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -85,6 +84,43 @@ function JuniorAdvocateEditProfile() {
 
   const handleChange = (event) => {
     const { name, value, files } = event.target;
+    
+    // Validation for specific fields
+    if (name === "name" && value && !/^[A-Za-z\s]+$/.test(value)) {
+      setErrors(prev => ({...prev, [name]: "Only alphabets are allowed"}));
+      return;
+    }
+    
+    if (name === "bcNo" && value && !/^\d{6,12}$/.test(value)) {
+      setErrors(prev => ({...prev, [name]: "Must be 6-12 digits"}));
+      return;
+    }
+    
+    if (name === "nationality" && value && !/^[A-Za-z\s]+$/.test(value)) {
+      setErrors(prev => ({...prev, [name]: "Only alphabets are allowed"}));
+      return;
+    }
+    
+    if (name === "qualification" && value && !/^[A-Za-z\s]+$/.test(value)) {
+      setErrors(prev => ({...prev, [name]: "Only alphabets are allowed"}));
+      return;
+    }
+    
+    if (name === "contact" && value && !/^\d{10}$/.test(value)) {
+      setErrors(prev => ({...prev, [name]: "Must be 10 digits"}));
+      return;
+    }
+    
+    if (name === "institute" && value && !/^[A-Za-z\s]+$/.test(value)) {
+      setErrors(prev => ({...prev, [name]: "Only alphabets are allowed"}));
+      return;
+    }
+    
+    if (name === "percentage" && value && (isNaN(value) || value < 0 || value > 100)) {
+      setErrors(prev => ({...prev, [name]: "Must be a number between 0-100"}));
+      return;
+    }
+    
     if (files) {
       setData((prevData) => ({
         ...prevData,
@@ -112,8 +148,43 @@ function JuniorAdvocateEditProfile() {
   function validateContact(fieldName, value) {
     if (!value.toString().trim()) {
       return `${fieldName} is required`;
-    } else if (value.length !== 10) {
-      return "Please enter a valid Contact Number";
+    } else if (!/^\d{10}$/.test(value)) {
+      return "Please enter a valid 10-digit Contact Number";
+    }
+    return "";
+  }
+
+  function validateEmail(email) {
+    if (!email) {
+      return "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return "Please enter a valid email address";
+    }
+    return "";
+  }
+
+  function validateDate(fieldName, value, isFutureAllowed = false) {
+    if (!value) {
+      return `${fieldName} is required`;
+    }
+    
+    const selectedDate = new Date(value);
+    const today = new Date();
+    
+    if (!isFutureAllowed && selectedDate > today) {
+      return "Future date is not allowed";
+    }
+    
+    return "";
+  }
+
+  function validatePercentage(value) {
+    if (!value) {
+      return "Percentage is required";
+    } else if (isNaN(value)) {
+      return "Must be a number";
+    } else if (value < 0 || value > 100) {
+      return "Must be between 0-100";
     }
     return "";
   }
@@ -124,28 +195,50 @@ function JuniorAdvocateEditProfile() {
     let errors = {};
     let formIsValid = true;
 
+    // Validate all fields
     errors.name = validateField("Full Name", data.name);
-    errors.dob = validateField("Date of Birth", data.dob);
+    if (!/^[A-Za-z\s]+$/.test(data.name)) {
+      errors.name = "Only alphabets are allowed";
+    }
+
+    errors.dob = validateDate("Date of Birth", data.dob);
+    
     errors.gender = validateField("Gender", data.gender);
     errors.nationality = validateField("Nationality", data.nationality);
+    if (!/^[A-Za-z\s]+$/.test(data.nationality)) {
+      errors.nationality = "Only alphabets are allowed";
+    }
+
     errors.address = validateField("Address", data.address);
-    // errors.contact = validateContact('Contact', data.contact);
-    errors.email = validateField("Email", data.email);
+    
+    errors.contact = validateContact('Contact', data.contact);
+    
+    errors.email = validateEmail(data.email);
+    
     errors.password = validateField("Password", data.password);
+    
     errors.bcNo = validateField("Bar Council Enrollment Number", data.bcNo);
-    errors.dateOfEnrollment = validateField(
-      "Date of Enrollment",
-      data.dateOfEnrollment
-    );
+    if (!/^\d{6,12}$/.test(data.bcNo)) {
+      errors.bcNo = "Must be 6-12 digits";
+    }
+    
+    errors.dateOfEnrollment = validateDate("Date of Enrollment", data.dateOfEnrollment);
+    
     errors.bcState = validateField("State Bar Council", data.bcState);
-    errors.specialization = validateField(
-      "Specialization Areas",
-      data.specialization
-    );
-    errors.percentage = validateField("Years of Experience", data.percentage);
-    errors.institute = validateField("Institute Name", data.qualification);
-    // errors.profilePic = validateField('Profile Photo', data.profilePic ? data.profilePic.name : '');
-    // errors.idProof = validateField('ID Proof Document', data.idProof ? data.idProof.name : '');
+    
+    errors.specialization = validateField("Specialization Areas", data.specialization);
+    
+    errors.percentage = validatePercentage(data.percentage);
+    
+    errors.institute = validateField("Institute Name", data.institute);
+    if (!/^[A-Za-z\s]+$/.test(data.institute)) {
+      errors.institute = "Only alphabets are allowed";
+    }
+    
+    errors.qualification = validateField("Educational Qualification", data.qualification);
+    if (!/^[A-Za-z\s]+$/.test(data.qualification)) {
+      errors.qualification = "Only alphabets are allowed";
+    }
 
     setErrors(errors);
 
@@ -193,6 +286,15 @@ function JuniorAdvocateEditProfile() {
     }
   };
 
+  // Function to get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   return (
     <div>
       <div className="junior-heading-div container-fluid">
@@ -214,10 +316,7 @@ function JuniorAdvocateEditProfile() {
                     <img src={upimg} />
                   <p className="mx-4" >Complete Updations</p>
                   </div>
-                  
                 )}
-
-                {/* <img src={img}></img> */}
               </div>
               <p className="ju-advocate_edit_profile_title mt-5">
                 Stay Ahead{" "}
@@ -268,6 +367,8 @@ function JuniorAdvocateEditProfile() {
                             name="name"
                             value={data.name}
                             onChange={handleChange}
+                            pattern="[A-Za-z\s]+"
+                            title="Only alphabets are allowed"
                           />
                           {errors.name && (
                             <div className="text-danger">{errors.name}</div>
@@ -284,6 +385,10 @@ function JuniorAdvocateEditProfile() {
                             name="bcNo"
                             value={data.bcNo}
                             onChange={handleChange}
+                            minLength="6"
+                            maxLength="12"
+                            pattern="\d{6,12}"
+                            title="Must be 6-12 digits"
                           />
                           {errors.bcNo && (
                             <div className="text-danger">{errors.bcNo}</div>
@@ -295,13 +400,13 @@ function JuniorAdvocateEditProfile() {
                           <label className="form-label advocateRegistrationlabel">
                             Date of Birth :
                           </label>
-                          {/* {console.log((data.dob).slice(0,10))} */}
                           <input
                             type="date"
                             className="form-control textbox-style"
                             name="dob"
                             value={data.dob.slice(0, 10)}
                             onChange={handleChange}
+                            max={getTodayDate()}
                           />
                           {errors.dob && (
                             <div className="text-danger">{errors.dob}</div>
@@ -317,6 +422,7 @@ function JuniorAdvocateEditProfile() {
                             name="dateOfEnrollment"
                             value={data.dateOfEnrollment}
                             onChange={handleChange}
+                            max={getTodayDate()}
                           />
                           {errors.dateOfEnrollment && (
                             <div className="text-danger">
@@ -335,6 +441,7 @@ function JuniorAdvocateEditProfile() {
                             name="gender"
                             value={data.gender}
                             onChange={handleChange}
+                            required
                           >
                             <option value="" disabled>
                               Select your Gender
@@ -359,6 +466,7 @@ function JuniorAdvocateEditProfile() {
                             name="bcState"
                             value={data.bcState}
                             onChange={handleChange}
+                            required
                           />
                           {errors.bcState && (
                             <div className="text-danger">{errors.bcState}</div>
@@ -377,6 +485,8 @@ function JuniorAdvocateEditProfile() {
                             name="nationality"
                             value={data.nationality}
                             onChange={handleChange}
+                            pattern="[A-Za-z\s]+"
+                            title="Only alphabets are allowed"
                           />
                           {errors.nationality && (
                             <div className="text-danger">
@@ -394,6 +504,7 @@ function JuniorAdvocateEditProfile() {
                               name="specialization"
                               value={data.specialization}
                               onChange={handleChange}
+                              required
                             >
                               <option value="" disabled>
                                 Select your Specialization Area
@@ -453,6 +564,7 @@ function JuniorAdvocateEditProfile() {
                             name="address"
                             value={data.address}
                             onChange={handleChange}
+                            required
                           />
                           {errors.address && (
                             <div className="text-danger">{errors.address}</div>
@@ -469,6 +581,8 @@ function JuniorAdvocateEditProfile() {
                             name="qualification"
                             value={data.qualification}
                             onChange={handleChange}
+                            pattern="[A-Za-z\s]+"
+                            title="Only alphabets are allowed"
                           />
                           {errors.qualification && (
                             <div className="text-danger">
@@ -483,12 +597,14 @@ function JuniorAdvocateEditProfile() {
                             Contact Number :
                           </label>
                           <input
-                            type="text"
+                            type="tel"
                             className="form-control textbox-style"
                             placeholder="Enter your contact number"
                             name="contact"
                             value={data.contact}
                             onChange={handleChange}
+                            pattern="\d{10}"
+                            title="Must be 10 digits"
                           />
                           {errors.contact && (
                             <div className="text-danger">{errors.contact}</div>
@@ -505,6 +621,8 @@ function JuniorAdvocateEditProfile() {
                             name="institute"
                             value={data.institute}
                             onChange={handleChange}
+                            pattern="[A-Za-z\s]+"
+                            title="Only alphabets are allowed"
                           />
                           {errors.institute && (
                             <div className="text-danger">
@@ -525,6 +643,7 @@ function JuniorAdvocateEditProfile() {
                             name="email"
                             value={data.email}
                             onChange={handleChange}
+                            required
                           />
                           {errors.email && (
                             <div className="text-danger">{errors.email}</div>
@@ -535,12 +654,15 @@ function JuniorAdvocateEditProfile() {
                             Percentage of Marks :
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             className="form-control textbox-style"
                             placeholder="Enter your Percentage of Marks"
                             name="percentage"
                             value={data.percentage}
                             onChange={handleChange}
+                            min="0"
+                            max="100"
+                            step="0.01"
                           />
                           {errors.percentage && (
                             <div className="text-danger">
@@ -554,12 +676,12 @@ function JuniorAdvocateEditProfile() {
                           <label className="form-label advocateRegistrationlabel">
                             Profile Photo :
                           </label>
-                          {/* {console.log(data.profilePic)} */}
                           <input
                             type="file"
                             className="form-control textbox-style"
                             name="profilePic"
                             onChange={handleChange}
+                            accept="image/*"
                           />
                           {errors.profilePic && (
                             <div className="text-danger">
@@ -567,18 +689,6 @@ function JuniorAdvocateEditProfile() {
                             </div>
                           )}
                         </div>
-                        {/* <div className="col-6">
-                            {console.log(.filename)}
-                            <label className="form-label advocateRegistrationlabel">Upload ID Proof :</label>
-                            {console.log(data.profilePic)}
-                            <input
-                              type="file"
-                              className="form-control textbox-style"
-                              name="profilePic"
-                              onChange={handleChange}
-                            />
-                            {errors.profilePic && <div className="text-danger">{errors.profilePic}</div>}
-                          </div> */}
                       </div>
                       <div className="row mt-3">
                         <div className="col-12 button-col">

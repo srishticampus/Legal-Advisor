@@ -30,7 +30,7 @@ function UserNavbar() {
             height="50"
             className="d-inline-block align-top"
           />{' '}
-          LEGAL LIAISON
+          LEGAL ADVISOR
         </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -45,20 +45,20 @@ function UserNavbar() {
                 Cases
               </Link>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link to='#' className="dropdown-item" >Add Cases</Link>
-                <Link to='#' className="dropdown-item" >Recent Cases</Link>
+                <Link to='/user_add_case' className="dropdown-item" >Add Cases</Link>
+                <Link to='/user_view_recent_cases' className="dropdown-item" >Recent Cases</Link>
                 {/* <Link to={''}  className="dropdown-item" >Advocates</Link> */}
                 
               </div>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#">Advocate</Link>
+              <Link className="nav-link" to="/client-viewalladvocate">Advocate</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#">Articles</Link>
+              <Link className="nav-link" to="/client-viewblogs">Articles</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#">Complaint</Link>
+              <Link className="nav-link" to="/user_add_complaint">Complaint</Link>
             </li>
             
             <li className="nav-item dropdown">

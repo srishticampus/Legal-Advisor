@@ -11,7 +11,7 @@ function UserFooter() {
           <div className='row'>
             <div className='col-lg-3 col-md-6 col-sm-12'>
             <img  className='col-4 footer-img' src={logo} alt='Admin Footer Logo'/>
-            <span className="footer-logo-text-change1 ml-2">LEGAL LIAISON</span>           
+            <span className="footer-logo-text-change1 ml-2">LEGAL ADVISOR</span>           
             </div>
             <div className='col-lg-3 col-md-6 col-sm-12'>
                 <h2 className='footer-title lawyer'>Lawyer</h2>

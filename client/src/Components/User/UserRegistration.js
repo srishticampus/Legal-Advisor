@@ -19,6 +19,38 @@ function UserRegistration() {
         setShowPassword(!showPassword);
     };
 
+    // Function to prevent non-alphabetic input for name
+    const handleNameChange = (e) => {
+        const value = e.target.value.replace(/[^A-Za-z ]/g, '');
+        handleChange(e);
+        setFieldValue('name', value);
+    };
+
+    // Function to prevent non-numeric input for contact and limit to 10 digits
+    const handleContactChange = (e) => {
+        const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+        handleChange(e);
+        setFieldValue('contact', value);
+    };
+
+    // Function to prevent future date selection for DOB
+    const handleDateChange = (e) => {
+        const selectedDate = new Date(e.target.value);
+        const today = new Date();
+        if (selectedDate > today) {
+            toast.warning("Date of birth cannot be in the future");
+            return;
+        }
+        handleChange(e);
+    };
+
+    // Function to prevent non-alphabetic input for nationality
+    const handleNationalityChange = (e) => {
+        const value = e.target.value.replace(/[^A-Za-z ]/g, '');
+        handleChange(e);
+        setFieldValue('nationality', value);
+    };
+
     const onSubmit = (values) => {
         console.log(values);
 
@@ -96,7 +128,7 @@ function UserRegistration() {
                                     placeholder="Enter your name"
                                     name="name"
                                     value={values.name}
-                                    onChange={handleChange}
+                                    onChange={handleNameChange}
                                     onBlur={handleBlur}
                                 />
                                 {errors.name && touched.name && (
@@ -121,12 +153,12 @@ function UserRegistration() {
                             <div className="user_registration_input mt-3">
                                 <label>Contact</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     className="form-control border border-dark"
-                                    placeholder="Enter your contact"
+                                    placeholder="Enter 10 digit contact number"
                                     name="contact"
                                     value={values.contact}
-                                    onChange={handleChange}
+                                    onChange={handleContactChange}
                                     onBlur={handleBlur}
                                 />
                                 {errors.contact && touched.contact && (
@@ -155,8 +187,9 @@ function UserRegistration() {
                                     className="form-control border border-dark"
                                     name="dob"
                                     value={values.dob}
-                                    onChange={handleChange}
+                                    onChange={handleDateChange}
                                     onBlur={handleBlur}
+                                    max={new Date().toISOString().split('T')[0]}
                                 />
                                 {errors.dob && touched.dob && (
                                     <span className="text-danger">{errors.dob}</span>
@@ -202,7 +235,7 @@ function UserRegistration() {
                                     placeholder="Enter your nationality"
                                     name="nationality"
                                     value={values.nationality}
-                                    onChange={handleChange}
+                                    onChange={handleNationalityChange}
                                     onBlur={handleBlur}
                                 />
                                 {errors.nationality && touched.nationality && (
@@ -213,7 +246,7 @@ function UserRegistration() {
                                 <label>Password</label>
                                 <div className="password-field">
                                     <input
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         className="form-control border border-dark"
                                         placeholder="Password"
                                         name="password"

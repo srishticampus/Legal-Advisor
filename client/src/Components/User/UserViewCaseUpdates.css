@@ -1,0 +1,34 @@
+.user_add_review {
+    min-height: 30vh;
+    width: 100%;
+    border: 1px solid grey;
+    margin-top: 20px;
+    padding: 20px 40px;
+}
+
+.review_form {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.review_form_textarea {
+    flex: 1; /* Take remaining space */
+}
+
+.review_form_button {
+    margin-left: 40px; /* Adjust margin as needed */
+}
+
+.view_review_container{
+    min-height: 10vh;
+    width: 75%;
+}
+
+.view_review_container i{
+    color: #986F06;
+}
+
+.view_review_container small{
+    color: #986F06;
+}

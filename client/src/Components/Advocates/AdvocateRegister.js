@@ -46,43 +46,72 @@ function AdvocateRegister() {
 
   const handleChange = (event) => {
     const { name, value, files } = event.target;
-    if (files) {
-      setData((prevData) => ({
-        ...prevData,
-        [name]: files[0],
-      }));
-    } else {
-      setData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
+    
+    // Special handling for name field - only alphabets and spaces
+    if (name === "name") {
+      const filteredValue = value.replace(/[^a-zA-Z ]/g, '');
+      setData(prev => ({ ...prev, [name]: filteredValue }));
+      return;
     }
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: "",
-    }));
+    
+    // Special handling for nationality field - only alphabets and spaces
+    if (name === "nationality") {
+      const filteredValue = value.replace(/[^a-zA-Z ]/g, '');
+      setData(prev => ({ ...prev, [name]: filteredValue }));
+      return;
+    }
+    
+    // Special handling for qualification field - only alphabets and spaces
+    if (name === "qualification") {
+      const filteredValue = value.replace(/[^a-zA-Z ]/g, '');
+      setData(prev => ({ ...prev, [name]: filteredValue }));
+      return;
+    }
+    
+    // Special handling for contact field - only numbers and max 10 digits
+    if (name === "contact") {
+      const filteredValue = value.replace(/\D/g, '').slice(0, 10);
+      setData(prev => ({ ...prev, [name]: filteredValue }));
+      return;
+    }
+    
+    // Special handling for bcNo field - only numbers and limit to 12 digits
+    if (name === "bcNo") {
+      const filteredValue = value.replace(/\D/g, '').slice(0, 12);
+      setData(prev => ({ ...prev, [name]: filteredValue }));
+      return;
+    }
+    
+    // For file inputs
+    if (files) {
+      setData(prev => ({ ...prev, [name]: files[0] }));
+    } else {
+      setData(prev => ({ ...prev, [name]: value }));
+    }
+    
+    // Clear error when user starts typing
+    setErrors(prev => ({ ...prev, [name]: "" }));
   };
 
   function validateString(fieldName, value) {
     const nameRegex = /^[a-zA-Z\s]+$/;
-    const noNumberRegex = /^[^\d]+$/;
     if (!value.trim()) {
       return `${fieldName} is required`;
     } else if (!nameRegex.test(value)) {
-      return `${fieldName} should not contain any numerical value`;
-    } else if (!noNumberRegex.test(value)) {
-      return `${fieldName} should not contain any numerical value`;
+      return `${fieldName} should contain only alphabets`;
     }
     return "";
   }
 
-  function validateNumber(fieldName, value, length = null) {
+  function validateNumber(fieldName, value, minLength = null, maxLength = null) {
     if (!value.trim()) {
       return `${fieldName} is required`;
     } else if (isNaN(value)) {
       return `${fieldName} must be a number`;
-    } else if (length && value.length !== length) {
-      return `${fieldName} must be ${length} digits long`;
+    } else if (minLength && value.length < minLength) {
+      return `${fieldName} must be at least ${minLength} digits`;
+    } else if (maxLength && value.length > maxLength) {
+      return `${fieldName} must be at most ${maxLength} digits`;
     }
     return "";
   }
@@ -95,11 +124,11 @@ function AdvocateRegister() {
   }
 
   function validateContact(fieldName, value) {
-    const contactRegex = /^[0-9]+$/;
+    const contactRegex = /^\d{10}$/;
     if (!value.trim()) {
       return `${fieldName} is required`;
-    } else if (!contactRegex.test(value) || value.length !== 10) {
-      return "Please enter a valid Contact Number";
+    } else if (!contactRegex.test(value)) {
+      return "Contact must be 10 digits";
     }
     return "";
   }
@@ -127,9 +156,9 @@ function AdvocateRegister() {
     if (!value.trim()) {
       return `${fieldName} is required`;
     }
-    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split("T")[0];
     if (value > today) {
-      return `${fieldName} cannot be a future date`;
+      return `${fieldName} cannot be in the future`;
     }
     return "";
   }
@@ -148,12 +177,12 @@ function AdvocateRegister() {
     errors.contact = validateContact("Contact", data.contact);
     errors.email = validateEmail("Email", data.email);
     errors.password = validatePassword("Password", data.password);
-    errors.bcNo = validateNumber("Bar Council Enrollment Number", data.bcNo);
+    errors.bcNo = validateNumber("Bar Council Enrollment Number", data.bcNo, 6, 12);
     errors.dateOfEnrollment = validateDate(
       "Date of Enrollment",
       data.dateOfEnrollment
     );
-    errors.bcState = validateString("State Bar Council", data.bcState);
+    errors.bcState = validateField("State Bar Council", data.bcState);
     errors.specialization = validateField(
       "Specialization Areas",
       data.specialization
@@ -215,9 +244,11 @@ function AdvocateRegister() {
         console.error("There was an error!", error);
         alert("Error");
       }
-      console.log(formData);
     }
   };
+
+  // Get today's date in YYYY-MM-DD format for date input max attributes
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <div>
@@ -240,6 +271,8 @@ function AdvocateRegister() {
                     name="name"
                     value={data.name}
                     onChange={handleChange}
+                    pattern="[A-Za-z ]+"
+                    title="Only alphabets are allowed"
                   />
                   {errors.name && (
                     <div className="text-danger">{errors.name}</div>
@@ -250,12 +283,14 @@ function AdvocateRegister() {
                     Bar Council Enrollment Number :
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     className="form-control form-control-lg form-input-style"
-                    placeholder="Enter your Bar Council enrollment number"
+                    placeholder="Enter 6-12 digit enrollment number"
                     name="bcNo"
                     value={data.bcNo}
                     onChange={handleChange}
+                    pattern="[0-9]{6,12}"
+                    title="Must be 6-12 digits"
                   />
                   {errors.bcNo && (
                     <div className="text-danger">{errors.bcNo}</div>
@@ -273,6 +308,7 @@ function AdvocateRegister() {
                     name="dob"
                     value={data.dob}
                     onChange={handleChange}
+                    max={today}
                     className={errors.dob ? "error form-control form-control-lg form-input-style" : "form-control form-control-lg form-input-style"}
                   />
                   {errors.dob && (
@@ -289,7 +325,8 @@ function AdvocateRegister() {
                     name="dateOfEnrollment"
                     value={data.dateOfEnrollment}
                     onChange={handleChange}
-                    className={errors.dateOfEnrollment ? "error form-control form-control-lg form-input-style" : " form-control form-control-lg form-input-style"}
+                    max={today}
+                    className={errors.dateOfEnrollment ? "error form-control form-control-lg form-input-style" : "form-control form-control-lg form-input-style"}
                   />
                   {errors.dateOfEnrollment && (
                     <div className="text-danger">{errors.dateOfEnrollment}</div>
@@ -349,6 +386,8 @@ function AdvocateRegister() {
                     name="nationality"
                     value={data.nationality}
                     onChange={handleChange}
+                    pattern="[A-Za-z ]+"
+                    title="Only alphabets are allowed"
                   />
                   {errors.nationality && (
                     <div className="text-danger">{errors.nationality}</div>
@@ -365,6 +404,8 @@ function AdvocateRegister() {
                     name="contact"
                     value={data.contact}
                     onChange={handleChange}
+                    pattern="[0-9]{10}"
+                    title="Please enter exactly 10 digits"
                   />
                   {errors.contact && (
                     <div className="text-danger">{errors.contact}</div>
@@ -383,6 +424,8 @@ function AdvocateRegister() {
                     name="qualification"
                     value={data.qualification}
                     onChange={handleChange}
+                    pattern="[A-Za-z ]+"
+                    title="Only alphabets are allowed"
                   />
                   {errors.qualification && (
                     <div className="text-danger">{errors.qualification}</div>
@@ -416,7 +459,7 @@ function AdvocateRegister() {
                     </option>
                     <option value="Human Rights Law">Human Rights Law</option>
                     <option value="International Law">International Law</option>
-                    <option value="TBanking and Finance Law">
+                    <option value="Banking and Finance Law">
                       Banking and Finance Law
                     </option>
                     <option value="Immigration Law">Immigration Law</option>

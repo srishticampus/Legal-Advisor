@@ -48,6 +48,42 @@ function JuniorAdvocateRegistration() {
 
   const handleChange = (event) => {
     const { name, value, files } = event.target;
+    
+    // Prevent entering non-alphabetic characters for name field
+    if (name === 'name' && !/^[a-zA-Z\s]*$/.test(value) && value !== '') {
+      return;
+    }
+    
+    // Prevent entering non-numeric characters for bcNo field
+    if (name === 'bcNo' && !/^\d*$/.test(value) && value !== '') {
+      return;
+    }
+    
+    // Prevent entering non-alphabetic characters for bcState field
+    if (name === 'bcState' && !/^[a-zA-Z\s]*$/.test(value) && value !== '') {
+      return;
+    }
+    
+    // Prevent entering non-alphabetic characters for nationality field
+    if (name === 'nationality' && !/^[a-zA-Z\s]*$/.test(value) && value !== '') {
+      return;
+    }
+    
+    // Prevent entering non-alphabetic characters for qualification field
+    if (name === 'qualification' && !/^[a-zA-Z\s]*$/.test(value) && value !== '') {
+      return;
+    }
+    
+    // Prevent entering non-numeric characters for contact field
+    if (name === 'contact' && !/^\d*$/.test(value) && value !== '') {
+      return;
+    }
+    
+    // Limit percentage to max 100
+    if (name === 'percentage' && value !== '' && (isNaN(value) || parseFloat(value) > 100)) {
+      return;
+    }
+
     if (files) {
       setData((prevData) => ({
         ...prevData,
@@ -70,18 +106,20 @@ function JuniorAdvocateRegistration() {
     if (!value.trim()) {
       return `${fieldName} is required`;
     } else if (!nameRegex.test(value)) {
-      return `Please enter a valid ${fieldName}`;
+      return `Please enter a valid ${fieldName} (letters only)`;
     }
     return '';
   }
 
-  function validateNumber(fieldName, value, length = null) {
+  function validateNumber(fieldName, value, min = null, max = null) {
     if (!value.trim()) {
       return `${fieldName} is required`;
     } else if (isNaN(value)) {
       return `${fieldName} must be a number`;
-    } else if (length && value.length !== length) {
-      return `${fieldName} must be ${length} digits long`;
+    } else if (min !== null && value.length < min) {
+      return `${fieldName} must be at least ${min} digits`;
+    } else if (max !== null && value.length > max) {
+      return `${fieldName} must be no more than ${max} digits`;
     }
     return '';
   }
@@ -98,7 +136,7 @@ function JuniorAdvocateRegistration() {
     if (!value.trim()) {
       return `${fieldName} is required`;
     } else if (!contactRegex.test(value) || value.length !== 10) {
-      return 'Please enter a valid Contact Number';
+      return 'Contact Number must be 10 digits';
     }
     return '';
   }
@@ -133,6 +171,17 @@ function JuniorAdvocateRegistration() {
     return '';
   }
 
+  function validatePercentage(fieldName, value) {
+    if (!value.trim()) {
+      return `${fieldName} is required`;
+    } else if (isNaN(value)) {
+      return `${fieldName} must be a number`;
+    } else if (parseFloat(value) < 0 || parseFloat(value) > 100) {
+      return `${fieldName} must be between 0 and 100`;
+    }
+    return '';
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -147,12 +196,12 @@ function JuniorAdvocateRegistration() {
     errors.contact = validateContact('Contact', data.contact);
     errors.email = validateEmail('Email', data.email);
     errors.password = validatePassword('Password', data.password);
-    errors.bcNo = validateNumber('Bar Council Enrollment Number', data.bcNo);
+    errors.bcNo = validateNumber('Bar Council Enrollment Number', data.bcNo, 6, 12);
     errors.dateOfEnrollment = validateDate('Date of Enrollment', data.dateOfEnrollment);
     errors.bcState = validateString('State Bar Council', data.bcState);
     errors.specialization = validateField('Specialization Areas', data.specialization);
     errors.institute = validateString('Institute Name', data.institute);
-    errors.percentage = validateNumber('Percentage', data.percentage);
+    errors.percentage = validatePercentage('Percentage', data.percentage);
     errors.qualification = validateString('Educational Qualification', data.qualification);
     errors.profilePic = validateField('Profile Photo', data.profilePic ? data.profilePic.name : '');
     errors.idProof = validateField('ID Proof Document', data.idProof ? data.idProof.name : '');
@@ -220,6 +269,8 @@ function JuniorAdvocateRegistration() {
                     name="name"
                     value={data.name}
                     onChange={handleChange}
+                    pattern="[A-Za-z\s]+"
+                    title="Only alphabetic characters are allowed"
                   />
                   {errors.name && <div className="text-danger">{errors.name}</div>}
                 </div>
@@ -228,10 +279,14 @@ function JuniorAdvocateRegistration() {
                   <input
                     type="text"
                     className={errors.bcNo ? "error form-control form-control-lg junior-form-input-style" : "form-control form-control-lg junior-form-input-style"}
-                    placeholder="Enter your Bar Council enrollment number"
+                    placeholder="Enter your Bar Council enrollment number (6-12 digits)"
                     name="bcNo"
                     value={data.bcNo}
                     onChange={handleChange}
+                    minLength="6"
+                    maxLength="12"
+                    pattern="\d{6,12}"
+                    title="Must be 6-12 digits"
                   />
                   {errors.bcNo && <div className="text-danger">{errors.bcNo}</div>}
                 </div>
@@ -245,6 +300,7 @@ function JuniorAdvocateRegistration() {
                     name="dob"
                     value={data.dob}
                     onChange={handleChange}
+                    max={new Date().toISOString().split('T')[0]}
                   />
                   {errors.dob && <div className="text-danger">{errors.dob}</div>}
                 </div>
@@ -256,6 +312,7 @@ function JuniorAdvocateRegistration() {
                     name="dateOfEnrollment"
                     value={data.dateOfEnrollment}
                     onChange={handleChange}
+                    max={new Date().toISOString().split('T')[0]}
                   />
                   {errors.dateOfEnrollment && <div className="text-danger">{errors.dateOfEnrollment}</div>}
                 </div>
@@ -285,6 +342,8 @@ function JuniorAdvocateRegistration() {
                     name="bcState"
                     value={data.bcState}
                     onChange={handleChange}
+                    pattern="[A-Za-z\s]+"
+                    title="Only alphabetic characters are allowed"
                   />
                   {errors.bcState && <div className="text-danger">{errors.bcState}</div>}
                 </div>
@@ -299,6 +358,8 @@ function JuniorAdvocateRegistration() {
                     name="nationality"
                     value={data.nationality}
                     onChange={handleChange}
+                    pattern="[A-Za-z\s]+"
+                    title="Only alphabetic characters are allowed"
                   />
                   {errors.nationality && <div className="text-danger">{errors.nationality}</div>}
                 </div>
@@ -353,6 +414,8 @@ function JuniorAdvocateRegistration() {
                     name="qualification"
                     value={data.qualification}
                     onChange={handleChange}
+                    pattern="[A-Za-z\s]+"
+                    title="Only alphabetic characters are allowed"
                   />
                   {errors.qualification && <div className="text-danger">{errors.qualification}</div>}
                 </div>
@@ -363,10 +426,14 @@ function JuniorAdvocateRegistration() {
                   <input
                     type="text"
                     className={errors.contact ? "error form-control form-control-lg junior-form-input-style" : "form-control form-control-lg junior-form-input-style"}
-                    placeholder="Enter your contact number"
+                    placeholder="Enter your contact number (10 digits)"
                     name="contact"
                     value={data.contact}
                     onChange={handleChange}
+                    minLength="10"
+                    maxLength="10"
+                    pattern="\d{10}"
+                    title="Must be 10 digits"
                   />
                   {errors.contact && <div className="text-danger">{errors.contact}</div>}
                 </div>
@@ -401,10 +468,13 @@ function JuniorAdvocateRegistration() {
                   <input
                     type="number"
                     className={errors.percentage ? "error form-control form-control-lg junior-form-input-style" : "form-control form-control-lg junior-form-input-style"}
-                    placeholder="Enter your Percentage of Marks"
+                    placeholder="Enter your Percentage of Marks (0-100)"
                     name="percentage"
                     value={data.percentage}
                     onChange={handleChange}
+                    min="0"
+                    max="100"
+                    step="0.01"
                   />
                   {errors.percentage && <div className="text-danger">{errors.percentage}</div>}
                 </div>
@@ -415,10 +485,11 @@ function JuniorAdvocateRegistration() {
                   <input
                     type="password"
                     className={errors.password ? "error form-control form-control-lg junior-form-input-style" : "form-control form-control-lg junior-form-input-style"}
-                    placeholder="Enter your password"
+                    placeholder="Enter your password (min 6 characters)"
                     name="password"
                     value={data.password}
                     onChange={handleChange}
+                    minLength="6"
                   />
                   {errors.password && <div className="text-danger">{errors.password}</div>}
                 </div>
@@ -429,6 +500,7 @@ function JuniorAdvocateRegistration() {
                     className={errors.idProof ? "error form-control form-control-lg junior-form-input-style" : "form-control form-control-lg junior-form-input-style"}
                     name="idProof"
                     onChange={handleChange}
+                    accept=".pdf,.jpg,.jpeg,.png"
                   />
                   {errors.idProof && <div className="text-danger">{errors.idProof}</div>}
                 </div>
@@ -439,6 +511,7 @@ function JuniorAdvocateRegistration() {
                     className={errors.profilePic ? "error form-control form-control-lg junior-form-input-style" : "form-control form-control-lg junior-form-input-style"}
                     name="profilePic"
                     onChange={handleChange}
+                    accept=".jpg,.jpeg,.png"
                   />
                   {errors.profilePic && <div className="text-danger">{errors.profilePic}</div>}
                 </div>

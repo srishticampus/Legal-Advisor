@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import img1 from '../../Assets/logo2.png';
 import axiosInstance from '../Constants/BaseUrl';
-
+import {toast} from 'react-toastify';
 
 function JuniorAdvocateNavbar() {
 const [advocate, setAdvocate] = useState({});
@@ -17,6 +17,7 @@ useEffect(() => {
 const handleLogout = () => {                
   localStorage.clear();
   window.location.reload()
+toast.success("Logout Successfully")
 };
 
   const id = localStorage.getItem('junioradvocateId');
@@ -45,7 +46,7 @@ const handleLogout = () => {
             height="80"
             className="d-inline-block align-top"
           />{' '}
-          LEGAL LIAISON
+          LEGAL ADVISOR
         </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -56,10 +57,10 @@ const handleLogout = () => {
               <Link className="nav-link" to="/JuniorAdvocate-homepage">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#">Advocates</Link>
+              <Link className="nav-link" to="/JuniorAdvocate-viewalladvocate">Advocates</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#">Mentorship</Link>
+              <Link className="nav-link" to="/junior_adv_view_mentor">Mentorship</Link>
             </li>
             {/* <li className="nav-item dropdown">
               <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,10 +72,10 @@ const handleLogout = () => {
               </div>
             </li> */}
             <li className="nav-item">
-              <Link className="nav-link" to="#">Asigned Cases</Link>
+              <Link className="nav-link" to="/junior_adv_view_assigned_cases">Asigned Cases</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#">Complaint</Link>
+              <Link className="nav-link" to="/junior_adv_add_complaint">Complaint</Link>
             </li>
             
             <li className="nav-item dropdown">

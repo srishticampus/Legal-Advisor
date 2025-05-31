@@ -15,7 +15,7 @@ function UserNav_Main() {
             height="80"
             className="d-inline-block align-top"
           />{' '}
-          LEGAL LIAISON
+          LEGAL ADVISOR
         </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@ function UserNav_Main() {
               </div>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="#">Advocate</Link>
+              <Link className="nav-link" to="/client-viewalladvocate">Advocate</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="#services">Notifications</Link>

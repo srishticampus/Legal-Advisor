@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../Constants/BaseUrl";
-import "./ViewProfile_AR.css";
+import "../Admin/ViewProfile_AR.css";
 import img from "../../Assets/image 21.png";
 import { imageUrl } from '../Constants/Image_Url' 
 

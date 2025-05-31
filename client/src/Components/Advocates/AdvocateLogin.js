@@ -3,7 +3,7 @@ import img from "../../Assets/image23.png";
 import './AdvocateLogin.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../Constants/BaseUrl';
-
+import { toast } from 'react-toastify';
 function AdvocateLogin() {
     const [data, setData] = useState({ email: '', password: '' });
     const [errors, setErrors] = useState({ email: '', password: '' });
@@ -52,7 +52,7 @@ function AdvocateLogin() {
                     console.log("Response:", response);
                     if (response.data.status === 200&&response.data.type=='advocate') {
                         console.log("Login Successful");
-                        alert("Login Successful");
+                        toast.success("Login Successful");
                         navigate('/advocate_home')
                         localStorage.setItem('advocateId',response.data.data._id)
                     } else if (response.data.status === 200&&response.data.type=='user') {
