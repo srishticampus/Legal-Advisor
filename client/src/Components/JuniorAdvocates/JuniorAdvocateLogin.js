@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../Constants/BaseUrl';
 import img from '../../Assets/junioradvocate-loginimg.png'
 import './JuniorAdvocateLogin.css'
+import { toast } from 'react-toastify';
 
 function JuniorAdvocateLogin() {
     const [data, setData] = useState({ email: '', password: '' });
@@ -52,16 +53,16 @@ function JuniorAdvocateLogin() {
                     console.log("Response:", response);
                     if (response.data.status === 200) {
                         console.log("Login Successful");
-                        alert("Login Successful");
+                        toast.success("Login Successful");
                         navigate('/JuniorAdvocate-homepage')
                         localStorage.setItem('junioradvocateId',response.data.data._id)
                     } else if(response.data.status==405) {
                         console.log("Login Failed");
-                        alert(response.data.msg);
+                        toast.error(response.data.msg);
                     
                     } else {
                         console.log("Login Failed");
-                        alert("Login Failed");
+                        toast.error("Login Failed");
                     }
                 })
                 .catch(error => {

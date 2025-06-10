@@ -1,5 +1,6 @@
 import React from 'react'
 import '../LandingPage/ContactUs.css'
+import { toast } from 'react-toastify'
 
 function ContactUs() {
   return (
@@ -19,7 +20,7 @@ function ContactUs() {
             <div class="fs-6  mb-2">
               Post your message below. We will get back to you ASAP
             </div>
-            <form id="contact_form" name="contact_form" onSubmit={()=>{alert('Posted Succesfully')}} >
+            <form id="contact_form" name="contact_form" onSubmit={()=>{toast.success('Posted Succesfully')}} >
               <div class="mb-5">
                 <label for="message">Message</label>
                 <textarea

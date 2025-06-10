@@ -3,7 +3,8 @@ import img from "../../Assets/image23.png";
 import './AdvocateLogin.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../Constants/BaseUrl';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import {toast ,ToastContainer } from 'react-toastify';
 function AdvocateLogin() {
     const [data, setData] = useState({ email: '', password: '' });
     const [errors, setErrors] = useState({ email: '', password: '' });
@@ -57,17 +58,17 @@ function AdvocateLogin() {
                         localStorage.setItem('advocateId',response.data.data._id)
                     } else if (response.data.status === 200&&response.data.type=='user') {
                         console.log("Login Successful");
-                        alert("Login Successful");
+                        toast.success("Login Successful");
                         localStorage.setItem('userId',response.data.data._id)
                         navigate('/user_home');
                     }else if (response.data.status === 200&&response.data.type=='junior') {
                         console.log("Login Successful");
-                        alert("Login Successful");
+                        toast.success("Login Successful");
                         navigate('/JuniorAdvocate-homepage')
                         localStorage.setItem('junioradvocateId',response.data.data._id)
                     }else if (response.data.status === 200&&response.data.type=='intern') {
                         console.log("Login Successful");
-                        alert("Login Successful");
+                        toast.success("Login Successful");
                         navigate('/intern_home');
                         localStorage.setItem('internId', response.data.data._id);
                     }
@@ -75,9 +76,9 @@ function AdvocateLogin() {
                     
                     else if(response.data.status==405){
                         console.log("Login Failed");
-                        alert(response.data.msg);
+                        toast.error(response.data.msg);
                     }else{
-                        alert('Login Failed');
+                        toast.error('Login Failed');
                     }
                 })
                 .catch(error => {

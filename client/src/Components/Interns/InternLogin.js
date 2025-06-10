@@ -59,7 +59,7 @@ function InternLogin() {
                         console.log("Login Failed");
                         toast.warning(response.data.msg);
                     }else{
-                        alert('Failed')
+                        toast.warning('Failed')
                         console.log("Login Failed");
 
                     }
