@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react"; 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import {
@@ -35,11 +35,11 @@ function ChatBot() {
       ...prevHistory,
       { type: "user", message: messageToSend },
     ]);
-    setUserInput("");
+    setUserInput(""); 
 
     setIsLoading(true);
     try {
-      const result = await model.generateContent(messageToSend);
+      const result = await model.generateContent(messageToSend); 
       const response = await result.response;
       setChatHistory((prevHistory) => [
         ...prevHistory,
@@ -70,14 +70,14 @@ function ChatBot() {
     if (chatHistoryRef.current) {
       chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
     }
-  }, [chatHistory, isLoading]);
+  }, [chatHistory, isLoading]); 
 
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100%', 
+        height: '100%',
       }}
     >
       <Card
@@ -95,24 +95,26 @@ function ChatBot() {
             flexGrow: 1, 
             display: 'flex',
             flexDirection: 'column', 
-            p: 2, 
+            p: 2,
             pb: 1, 
+            minHeight: 0, 
           }}
         >
           <Box
             ref={chatHistoryRef} 
             sx={{
-              flexGrow: 1,     
+              flexGrow: 1, 
               overflowY: "auto", 
               pr: 1, 
               mb: 2, 
+              minHeight: 0, 
             }}
           >
             <ChatBotHistory chatHistory={chatHistory} />
             <ChatBotLoading isLoading={isLoading} />
           </Box>
 
-          <Box sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: 1 }}> 
             <TextField
               fullWidth
               variant="outlined"
@@ -122,12 +124,14 @@ function ChatBot() {
               onKeyPress={handleKeyPress}
               disabled={isLoading}
               size="small"
+              sx={{ borderRadius: 4, '& .MuiOutlinedInput-notchedOutline': { borderRadius: 4 } }}
             />
             <Button
               variant="contained"
               onClick={sendMessage}
               disabled={isLoading}
-              sx={{ borderRadius: 4 }}
+              sx={{ borderRadius: 4 , backgroundColor:"#2A2A2A" }}
+              
             >
               Send
             </Button>

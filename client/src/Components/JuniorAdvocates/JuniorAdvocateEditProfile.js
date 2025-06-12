@@ -6,6 +6,7 @@ import axiosMultipartInstance from "../Constants/FormDataUrl";
 import { imageUrl } from "../Constants/Image_Url";
 import { useNavigate } from "react-router-dom";
 import upimg from "../../Assets/updateImage.jpg";
+import {toast ,ToastContainer } from 'react-toastify';
 
 function JuniorAdvocateEditProfile() {
   const id = localStorage.getItem("junioradvocateId");
@@ -67,14 +68,14 @@ function JuniorAdvocateEditProfile() {
           console.log(res.data);
           setData(res.data.data);
         } else {
-          alert(`Failed to view junior advocate data: ${res.data.msg}`);
+          toast.error(`Failed to view junior advocate data: ${res.data.msg}`);
         }
       } catch (error) {
         console.error(
           "There was an error read the junior advocate data!",
           error
         );
-        alert("Error view junior advocate data");
+        toast.error("Error view junior advocate data");
       }
     };
     if (id !== null) {
@@ -274,14 +275,14 @@ function JuniorAdvocateEditProfile() {
           formData
         );
         if (res.data.status === 200) {
-          alert("Junior Advocate profile updated successfully");
+          toast.success("Junior Advocate profile updated successfully");
           window.location.reload();
         } else {
-          alert(`Junior Advocate Profile Update Failed: ${res.data.msg}`);
+          toast.error(`Junior Advocate Profile Update Failed: ${res.data.msg}`);
         }
       } catch (error) {
         console.error("There was an error!", error);
-        alert("Error updating junior advocate profile");
+        toast.error("Error updating junior advocate profile");
       }
     }
   };

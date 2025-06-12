@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./AdvocateRegister.css";
 import axiosMultipartInstance from "../Constants/FormDataUrl";
 import { useNavigate } from "react-router-dom";
-
+import {toast ,ToastContainer } from 'react-toastify';
+ 
 function AdvocateRegister() {
   const navigate = useNavigate();
 
@@ -235,14 +236,14 @@ function AdvocateRegister() {
           formData
         );
         if (res.data.status === 200) {
-          alert("Advocate registered successfully");
+          toast.success("Advocate registered successfully");
           navigate("/AdvocateLogin");
         } else {
-          alert(`Advocate Registration Failed: ${res.data.msg}`);
+          toast.error(`Advocate Registration Failed: ${res.data.msg}`);
         }
       } catch (error) {
         console.error("There was an error!", error);
-        alert("Error");
+        toast.error("Error");
       }
     }
   };

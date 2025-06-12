@@ -119,3 +119,49 @@ text-align: left;
 margin: 0;
 
 }
+
+.user_home_card_container {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; 
+    margin-top: -100px; 
+    position: relative; 
+    z-index: 10; 
+    padding: 0 15px; 
+}
+
+
+.user_home_cards:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.user_home_cards img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.user_home_cards p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+*/
+
+.MuiCardContent-root:last-child {
+    padding-bottom: 16px !important; 
+}
+
+
+.user_home_card_container {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; 
+    margin-top: -100px; 
+    position: relative; 
+    z-index: 10; 
+    padding: 0 15px; 
+    align-items: flex-start; 
+}
+

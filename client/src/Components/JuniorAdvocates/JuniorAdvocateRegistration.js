@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosMultipartInstance from '../Constants/FormDataUrl';
 import '../JuniorAdvocates/JuniorAdvocateRegistration.css';
+import { toast } from 'react-toastify';
 
 function JuniorAdvocateRegistration() {
   const navigate = useNavigate();
@@ -238,14 +239,14 @@ function JuniorAdvocateRegistration() {
       try {
         const res = await axiosMultipartInstance.post('/registerJuniorAdvocate', formData);
         if (res.data.status === 200) {
-          alert('Junior Advocate registered successfully');
+          toast.success('Junior Advocate registered successfully');
           navigate('/AdvocateLogin');
         } else {
-          alert(`Junior Advocate Registration Failed: ${res.data.msg}`);
+          toast.error(`Junior Advocate Registration Failed: ${res.data.msg}`);
         }
       } catch (error) {
         console.error('There was an error!', error);
-        alert('Error');
+        toast.error('Error');
       }
     }
   };

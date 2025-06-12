@@ -5,6 +5,7 @@ import tick from '../../Assets/editPofileCheckmark.png'
 import axiosMultipartInstance from '../Constants/FormDataUrl'
 import { imageUrl } from '../Constants/Image_Url'
 import { useNavigate } from 'react-router-dom'
+import {toast ,ToastContainer } from 'react-toastify';
 
 function AdvocateEditProfile() {
 
@@ -64,11 +65,11 @@ function AdvocateEditProfile() {
                     console.log(res.data);
                       setData(res.data.data);
                   } else {
-                      alert(`Failed to view advocate data: ${res.data.msg}`);
+                      toast.error(`Failed to view advocate data: ${res.data.msg}`);
                   }
               } catch (error) {
                   console.error('There was an error read the advocate data!', error);
-                  alert('Error view advocate data');
+                  toast.error('Error view advocate data');
               }
           };
 
@@ -169,14 +170,14 @@ function AdvocateEditProfile() {
             try {
                 const res = await axiosMultipartInstance.post(`/editAdvocateById/${id}`,formData);
                 if (res.data.status === 200) {
-                    alert('Advocate profile updated successfully');
+                    toast.success('Advocate profile updated successfully');
                     window.location.reload();
                 } else {
-                    alert(`Advocate Profile Update Failed: ${res.data.msg}`);
+                    toast.error(`Advocate Profile Update Failed: ${res.data.msg}`);
                 }
             } catch (error) {
                 console.error('There was an error!', error);
-                alert('Error updating advocate profile');
+                toast.error('Error updating advocate profile');
             }
         }
     };

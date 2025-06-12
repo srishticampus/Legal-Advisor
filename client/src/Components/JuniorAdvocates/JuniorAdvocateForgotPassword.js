@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../Constants/BaseUrl';
 import img from '../../Assets/junioradvocate-loginimg.png';
+import { toast } from 'react-toastify';
 
 function JuniorAdvocateForgotPassword() {
     const [data, setData] = useState({ email: '', password: '', repassword: '' });
@@ -66,15 +67,15 @@ function JuniorAdvocateForgotPassword() {
                     console.log("Response:", response);
                     if (response.data.status === 200) {
                         console.log("Password Reset Successful");
-                        alert("Password Reset Successful");
+                        toast.success("Password Reset Successful");
                         navigate('/JuniorAdvocateLogin');
                     } else if(response.data.status==500) {
                         console.log(response.data.msg);
-                        alert("Password Reset Failed");
+                        toast.error("Password Reset Failed");
                     }
                      else {
                         console.log("Password Reset Failed");
-                        alert("Password Reset Failed");
+                        toast.error("Password Reset Failed");
                     }
                 })
                 .catch(error => {

@@ -99,13 +99,17 @@ function LandingServices() {
       </div>
 
       <Fab
-        color="secondary" 
+         color="secondary" 
         aria-label="chat"
         sx={{
           position: 'fixed',
           bottom: 24, 
-          right: 24,  
+          right: 24, 
           zIndex: 1100, 
+          backgroundColor: 'gray',
+          '&:hover': {
+            backgroundColor: 'rgb(24, 22, 22)',
+          }
         }}
         onClick={handleToggleChatBot}
       >

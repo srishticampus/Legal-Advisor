@@ -4,6 +4,7 @@ import axiosMultipartInstance from '../Constants/FormDataUrl'; // Adjust import 
 import { imageUrl } from '../Constants/Image_Url';
 import axiosInstance from '../Constants/BaseUrl';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function UserProfile() {
 
@@ -46,11 +47,11 @@ function UserProfile() {
                 if (res.data.status === 200) {
                     setData(res.data.data);
                 } else {
-                    alert(`Failed to fetch user data: ${res.data.msg}`);
+                    toast.success(`Failed to fetch user data: ${res.data.msg}`);
                 }
             } catch (error) {
                 console.error('Error fetching user data:', error);
-                alert('Error fetching user data');
+                toast.error('Error fetching user data');
             }
         };
         if(id!==null){
@@ -126,13 +127,13 @@ function UserProfile() {
                 if (res.data.status === 200) {
                     console.log(res);
                     window.location.reload()
-                    alert('User profile updated successfully');
+                    toast.success('User profile updated successfully');
                 } else {
-                    alert(`User Profile Update Failed: ${res.data.msg}`);
+                    toast.error(`User Profile Update Failed: ${res.data.msg}`);
                 }
             } catch (error) {
                 console.error('There was an error:', error);
-                alert('Error updating user profile');
+                toast.error('Error updating user profile');
             }
         }
     };

@@ -42,19 +42,19 @@ function AdminSidebar() {
                 <div>
                 <label className='label-general'>General</label>
                 <div className='adjust-space'>
-                <img src={userimg} className='image-adjust-1 img1-padding each' alt='User image'/>{' '},{' '},{' '}
+                <img src={userimg} className='image-adjust-1 img1-padding each' alt='User image'/>
                 <Link to={'/admin-viewallusers'}>
                 <label className='label-sub'>Users</label>
                 </Link>
                 </div>
                 <div className='adjust-space'>
-                <img src={advocateimg} className='img2-padding' alt='User image'/>{' '},{' '},{' '}
+                <img src={advocateimg} className='img2-padding' alt='User image'/>
                     <Link to='/admin-viewalladvocates'>
                     <label className='label-sub'>Advocate</label>
                     </Link>
                 </div>
                 <div className='adjust-space'>
-                <img src={casesimg} className='image-adjust-1 padding each' alt='User image'/>{' '},{' '},{' '}
+                <img src={casesimg} className='image-adjust-1 padding each' alt='User image'/>
                 <Link to={'/admin_view_cases'}>
                 <label className='label-sub'>Cases</label>
 
@@ -62,17 +62,17 @@ function AdminSidebar() {
                 </div>
                
                 <div className='adjust-space'>
-                <img src={juniorimg} className='image-adjust-1 padding each' alt='User image'/>{' '},{' '},{' '}
+                <img src={juniorimg} className='image-adjust-1 padding each' alt='User image'/>
                     <Link to='/adminviewalljunioradvocates'>
                     <label className='label-sub '>Junior Advocates</label>
                     </Link>
                 </div>
                 <div className='adjust-space'>
-                <img src={internimg} className='image-adjust-1 padding each-1' alt='User image'/>{' '},{' '}
+                <img src={internimg} className='image-adjust-1 padding each-1' alt='User image'/>
                     <Link to={'/admin_view_approved_interns'}><label className='label-sub padding'>Interns</label></Link>
                 </div>
                 <div className='adjust-space'>
-                <img src={internimg} className='image-adjust-1 padding each-1' alt='User image'/>{' '},{' '}
+                <img src={internimg} className='image-adjust-1 padding each-1' alt='User image'/>
                     <Link to={'/admin_view_complaints'}><label className='label-sub padding'>Complaints</label></Link>
                 </div>
                 </div>

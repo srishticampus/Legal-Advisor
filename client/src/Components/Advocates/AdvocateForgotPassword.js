@@ -3,6 +3,7 @@ import img from "../../Assets/image23.png";
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../Constants/BaseUrl';
 import './AdvocateLogin.css';
+import {toast ,ToastContainer } from 'react-toastify';
 
 function AdvocateForgotPassword() {
     const [data, setData] = useState({ email: '', password: '', repassword: '' });
@@ -67,15 +68,15 @@ function AdvocateForgotPassword() {
                     console.log("Response:", response);
                     if (response.data.status === 200) {
                         console.log("Password Reset Successful");
-                        alert("Password Reset Successful");
+                        toast.success("Password Reset Successful");
                         navigate('/AdvocateLogin');
                     } else if(response.data.status==500) {
                         console.log("Password Reset Failed");
-                        alert(response.data.msg);
+                        toast.error(response.data.msg);
                     }
                      else {
                         console.log("Password Reset Failed");
-                        alert("Password Reset Failed");
+                        toast.error("Password Reset Failed")
                     }
                 })
                 .catch(error => {
