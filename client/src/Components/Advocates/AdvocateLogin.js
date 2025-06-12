@@ -113,6 +113,7 @@ function AdvocateLogin() {
                                         name="email"
                                         value={data.email}
                                         onChange={handleChange}
+                                         autocomplete="off"
                                     />
                                     {errors.email && <div className="text-danger">{errors.email}</div>}
                                 </div>
@@ -125,6 +126,7 @@ function AdvocateLogin() {
                                         name="password"
                                         value={data.password}
                                         onChange={handleChange}
+                                         autocomplete="off"
                                     />
                                     {errors.password && <div className="text-danger">{errors.password}</div>}
                                 </div>

@@ -70,6 +70,7 @@ function AdminLogin() {
                     value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    autocomplete="off"
                   />
                   {errors.email && touched.email && (
                     <span className="text-danger">{errors.email}</span>
@@ -85,6 +86,7 @@ function AdminLogin() {
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    autocomplete="off"
                   />
                   {errors.password && touched.password && (
                     <span className="text-danger">{errors.password}</span>

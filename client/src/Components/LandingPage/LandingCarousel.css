@@ -4,7 +4,6 @@
   background-repeat: no-repeat;
   background-image:  linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.879) 100%),url('../../Assets/law12.jpg');
   background-size: cover;
-  /* background-position: center; Optional: Centers the background image */
 }
 
 
@@ -12,7 +11,7 @@
     color:#e2e2e2;
     position: absolute;
     font-size: 50px;
-    font-weight: 700;
+    font-weight: 600;
     left:150px;
     top:350px;
     text-transform: capitalize;
@@ -78,14 +77,14 @@ border-radius: 50%;
 
 .nav-links {
   display: flex;
-  align-items: center; /* Aligns items vertically center */
+  align-items: center; 
 }
 
 .nav-item {
   font-size: 18px;
   font-weight: bold;
-  margin-left: 15px; /* Adjust as needed for spacing between items */
-  color: #fff; /* Change the color if needed */
-  text-decoration: none; /* Remove underline */
+  margin-left: 15px; 
+  color: #fff; 
+  text-decoration: none;
 }
   
